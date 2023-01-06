@@ -16,7 +16,7 @@ const ModalKeranjang = (props) => {
           <Form onSubmit={props.handleSubmit}>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Total Harga</Form.Label>
-              <p><strong>Rp. {numberWithCommas(props.keranjangDetail.total_harga)}</strong></p>
+              <p><strong>Rp. {numberWithCommas(props.totalHarga)}</strong></p>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Jumlah</Form.Label>
@@ -40,7 +40,7 @@ const ModalKeranjang = (props) => {
           <Button variant="secondary" className="bg-slate-500" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="danger" className="bg-red-500" onClick={props.handleClose}>
+          <Button variant="danger" className="bg-red-500" onClick={(() => props.handleDelete(props.keranjangDetail.id))}>
             Hapus Pesanan
           </Button>
         </Modal.Footer>

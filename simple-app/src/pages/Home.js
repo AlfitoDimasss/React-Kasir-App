@@ -25,6 +25,18 @@ function Home() {
         console.log(error);
       });
 
+    // axios.get(API_URL + "/keranjangs")
+    //   .then(res => {
+    //     const keranjangs = res.data;
+    //     setKeranjang(keranjangs);
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
+    getListKeranjang();
+  }, [choosen]);
+
+  const getListKeranjang = () => {
     axios.get(API_URL + "/keranjangs")
       .then(res => {
         const keranjangs = res.data;
@@ -33,7 +45,7 @@ function Home() {
       .catch(error => {
         console.log(error);
       });
-  }, [choosen]);
+  }
 
   // FUNGSI UBAH KATEGORI
   const changeCategory = (value) => {
@@ -62,6 +74,7 @@ function Home() {
           };
           axios.post(API_URL + "/keranjangs", keranjangTmp)
             .then(res => {
+              getListKeranjang();
               swal({
                 title: "Success",
                 text: keranjangTmp.product.nama + " berhasil ditambahkan ke keranjang",
@@ -80,6 +93,7 @@ function Home() {
           };
           axios.put(API_URL + "/keranjangs/" + res.data[0].id, keranjangTmp)
             .then(res => {
+              getListKeranjang();
               swal({
                 title: "Success",
                 text: keranjangTmp.product.nama + " berhasil ditambahkan ke keranjang",
@@ -111,7 +125,7 @@ function Home() {
               )}
             </Row>
           </Col>
-          <Hasil keranjang={keranjang} />
+          <Hasil keranjang={keranjang} getListKeranjang={getListKeranjang} />
         </Row>
       </Container>
     </div>
